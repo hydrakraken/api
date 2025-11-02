@@ -1,0 +1,8 @@
+{
+  "name": "siwam-api-proxy",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Free Siwam Mobile Lookup API Proxy by BanixNexus",
+  "main": "api/index.js",
+  "license": "MIT"
+}
