@@ -1,1 +1,100 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📱 Siwam API Lookup | BanixNexus</title>
+<style>
+  body {
+    background: radial-gradient(circle at center, #0f0f0f, #000);
+    color: #0ff;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    margin: 0;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 2em;
+    color: #00ffff;
+    text-shadow: 0 0 10px #0ff;
+  }
+  input {
+    padding: 10px;
+    font-size: 1em;
+    width: 250px;
+    border: 1px solid #0ff;
+    background: #000;
+    color: #0ff;
+    border-radius: 5px;
+    outline: none;
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #000;
+    background: #00ffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button:hover {
+    background: #0ff9;
+    transform: scale(1.05);
+  }
+  pre {
+    text-align: left;
+    margin: 20px auto;
+    width: 80%;
+    padding: 20px;
+    background: rgba(0,0,0,0.8);
+    color: #00ffb3;
+    border: 1px solid #0ff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00ffff55;
+  }
+  footer {
+    margin-top: 30px;
+    color: #888;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+  <h1>⚡ Siwam API Lookup</h1>
+  <p>Enter a mobile number to fetch info 🔍</p>
+
+  <input type="text" id="numberInput" placeholder="Enter mobile number...">
+  <button onclick="fetchInfo()">Fetch Info</button>
+
+  <pre id="output">{ "waiting": "Enter a number and click Fetch..." }</pre>
+
+  <footer>Developed by <b>BanixNexus ⚡</b> | Powered by Siwam API</footer>
+
+<script>
+async function fetchInfo() {
+  const num = document.getElementById("numberInput").value.trim();
+  const out = document.getElementById("output");
+
+  if (!/^\d{7,15}$/.test(num)) {
+    out.textContent = JSON.stringify({ error: "❌ Invalid number format." }, null, 2);
+    return;
+  }
+
+  out.textContent = "{ \"loading\": \"Fetching data...\" }";
+
+  const url = `https://siwammodz.vercel.app/api?key=Siwam_9832&type=mobile&term=${num}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    out.textContent = JSON.stringify(data, null, 2);
+  } catch (e) {
+    out.textContent = JSON.stringify({ error: e.message }, null, 2);
+  }
+}
+</script>
+</body>
+</html>
